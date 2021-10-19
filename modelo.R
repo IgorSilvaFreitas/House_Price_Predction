@@ -44,12 +44,7 @@ test <- test |>
 str(train)
 
 
-aux <- train |> distinct(MSSubClass)
-#Variável aparenta ser categorica, poor isso será transformada
-train$MSSubClass <- as.factor(train$MSSubClass)
-test$MSSubClass <- as.factor(test$MSSubClass)
-
-#Os anos também serão transformada para categoricas
+#Os anos serão transformada para categoricas
 train$YearBuilt <- as.factor(train$YearBuilt)
 train$YearRemodAdd <- as.factor(train$YearRemodAdd)
 train$YrSold <- as.factor(train$YrSold)
@@ -103,10 +98,6 @@ caret::postResample(preditor,teste$SalePrice)
 
 
 #Aplicando na amostra test disponibilizada na competição
-test <- predict(preproc, test)
-
-test <- na.omit(test)
-
 pred <- predict(modelo_xgb, test)
 
 test$SalePrice <- pred
